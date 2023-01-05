@@ -8,8 +8,11 @@ npm i , npm start to initialize
 
 ## Screenshot 
 
-![image](https://user-images.githubusercontent.com/112224915/210683931-d8b8415a-f11c-4a75-8232-b28f5a6ecbe7.png)
 ![image](https://user-images.githubusercontent.com/112224915/210684210-5bd39eda-2df3-48a7-8800-acef79a8fdb6.png)
+
+## Code Utilized 
+
+This application was made using JavaScript, NPM, and MySQL.
 
 
 
