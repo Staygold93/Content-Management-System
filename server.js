@@ -64,13 +64,21 @@ function initialPrompt() {
 }
 
 
-function viewAllEmployees() {
-    db.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;", 
-    function(err, res) {
-      if (err) throw err
-      console.table(res)
-      initialPrompt()
-  })
+const viewAllEmployees = async () => {
+  console.log('All Employees');
+  try {
+      let query = 'SELECT * FROM employee';
+      db.query(query, function (err, res) {
+          if (err) throw err;
+          let employeeArray = [];
+          res.forEach(employee => employeeArray.push(employee));
+          console.table(employeeArray);
+          initialPrompt();
+      });
+  } catch (err) {
+      console.log(err);
+      initialPrompt();
+  };
 }
 
 
@@ -277,7 +285,7 @@ function addRole() {
   });
   }
 
-function addDepartment() { 
+function addDept() { 
 
     inquirer.prompt([
         {
@@ -286,7 +294,7 @@ function addDepartment() {
           message: "What Department would you like to add?"
         }
     ]).then(function(res) {
-        var query = connection.query(
+        var query = db.query(
             "INSERT INTO department SET ? ",
             {
               name: res.name
